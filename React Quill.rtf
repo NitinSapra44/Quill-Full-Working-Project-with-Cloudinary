@@ -1,0 +1,233 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\fmodern\fcharset0 Courier;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;\red89\green138\blue67;
+\red24\green24\blue24;\red193\green193\blue193;\red183\green111\blue179;\red140\green211\blue254;\red194\green126\blue101;
+\red67\green192\blue160;\red212\green214\blue154;\red70\green137\blue204;\red66\green179\blue255;\red202\green202\blue202;
+\red167\green197\blue152;\red109\green109\blue109;\red24\green24\blue24;\red183\green111\blue179;\red205\green173\blue106;
+}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c99985\c0;\cssrgb\c41569\c60000\c33333;
+\cssrgb\c12157\c12157\c12157;\cssrgb\c80000\c80000\c80000;\cssrgb\c77255\c52549\c75294;\cssrgb\c61176\c86275\c99608;\cssrgb\c80784\c56863\c47059;
+\cssrgb\c30588\c78824\c69020;\cssrgb\c86275\c86275\c66667;\cssrgb\c33725\c61176\c83922;\cssrgb\c30980\c75686\c100000;\cssrgb\c83137\c83137\c83137;
+\cssrgb\c70980\c80784\c65882;\cssrgb\c50196\c50196\c50196;\cssrgb\c12157\c12157\c12157;\cssrgb\c77255\c52549\c75294;\cssrgb\c84314\c72941\c49020;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww29200\viewh15620\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs72 \cf0 To Get Started with React-Quill we need to install \'93npm install react-quill\'94 on react version older Than 19 i.e maybe 18 or 17.\
+So firstly downgrade the version of react by default it is on version 19.\
+After that use the command \'93npm install react-quill\'94 to install the required dependencies.\
+Also Import react quill styles using \'93import "react-quill/dist/quill.snow.css\'94.\'94 \
+We are setting up this react quill to be used with Cloudinary such that my image is being uploaded on Cloudinary account.\
+\
+We can use \'93npm install 
+\f1 \cf2 \cb3 \expnd0\expndtw0\kerning0
+quill-image-resize-module-react
+\f0 \cf0 \cb1 \kerning1\expnd0\expndtw0 \'94 \
+\
+This is my editor component:-\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs24 \cf4 \cb5 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 // src/components/Editor.jsx\cf6 \cb1 \strokec6 \
+\cf7 \cb5 \strokec7 import\cf6 \strokec6  \cf8 \strokec8 React\cf6 \strokec6 , \{ \cf8 \strokec8 useState\cf6 \strokec6 , \cf8 \strokec8 useMemo\cf6 \strokec6 , \cf8 \strokec8 useRef\cf6 \strokec6  \} \cf7 \strokec7 from\cf6 \strokec6  \cf9 \strokec9 "react"\cf6 \strokec6 ;\cb1 \
+\cf7 \cb5 \strokec7 import\cf6 \strokec6  \cf8 \strokec8 ReactQuill\cf6 \strokec6 , \{ \cf8 \strokec8 Quill\cf6 \strokec6  \} \cf7 \strokec7 from\cf6 \strokec6  \cf9 \strokec9 "react-quill"\cf6 \strokec6 ;\cb1 \
+\cf7 \cb5 \strokec7 import\cf6 \strokec6  \cf8 \strokec8 axios\cf6 \strokec6  \cf7 \strokec7 from\cf6 \strokec6  \cf9 \strokec9 "axios"\cf6 \strokec6 ;\cb1 \
+\cf7 \cb5 \strokec7 import\cf6 \strokec6  \cf9 \strokec9 "react-quill/dist/quill.snow.css"\cf6 \strokec6 ;\cb1 \
+\cf7 \cb5 \strokec7 import\cf6 \strokec6  \cf8 \strokec8 ImageResize\cf6 \strokec6  \cf7 \strokec7 from\cf6 \strokec6  \cf9 \strokec9 "quill-image-resize-module-react"\cf6 \strokec6 ;\cb1 \
+\
+\cf4 \cb5 \strokec4 // \uc0\u9989  Register image resize module\cf6 \cb1 \strokec6 \
+\cf10 \cb5 \strokec10 Quill\cf6 \strokec6 .\cf11 \strokec11 register\cf6 \strokec6 (\cf9 \strokec9 "modules/imageResize"\cf6 \strokec6 , \cf8 \strokec8 ImageResize\cf6 \strokec6 );\cb1 \
+\
+\cf12 \cb5 \strokec12 const\cf6 \strokec6  \cf13 \strokec13 Size\cf6 \strokec6  \cf14 \strokec14 =\cf6 \strokec6  \cf10 \strokec10 Quill\cf6 \strokec6 .\cf11 \strokec11 import\cf6 \strokec6 (\cf9 \strokec9 "attributors/style/size"\cf6 \strokec6 );\cb1 \
+\cf13 \cb5 \strokec13 Size\cf6 \strokec6 .\cf8 \strokec8 whitelist\cf6 \strokec6  \cf14 \strokec14 =\cf6 \strokec6  [\cf9 \strokec9 "12px"\cf6 \strokec6 , \cf9 \strokec9 "14px"\cf6 \strokec6 , \cf9 \strokec9 "18px"\cf6 \strokec6 , \cf9 \strokec9 "24px"\cf6 \strokec6 , \cf9 \strokec9 "32px"\cf6 \strokec6 , \cf9 \strokec9 "48px"\cf6 \strokec6 ];\cb1 \
+\cf10 \cb5 \strokec10 Quill\cf6 \strokec6 .\cf11 \strokec11 register\cf6 \strokec6 (\cf13 \strokec13 Size\cf6 \strokec6 , \cf12 \strokec12 true\cf6 \strokec6 );\cb1 \
+\
+\cf12 \cb5 \strokec12 const\cf6 \strokec6  \cf11 \strokec11 Editor\cf6 \strokec6  \cf14 \strokec14 =\cf6 \strokec6  (\{ \cf8 \strokec8 onSubmit\cf6 \strokec6  \}) \cf12 \strokec12 =>\cf6 \strokec6  \{\cb1 \
+\cb5   \cf12 \strokec12 const\cf6 \strokec6  \cf13 \strokec13 quillRef\cf6 \strokec6  \cf14 \strokec14 =\cf6 \strokec6  \cf11 \strokec11 useRef\cf6 \strokec6 (\cf12 \strokec12 null\cf6 \strokec6 );\cb1 \
+\cb5   \cf12 \strokec12 const\cf6 \strokec6  [\cf13 \strokec13 value\cf6 \strokec6 , \cf11 \strokec11 setValue\cf6 \strokec6 ] \cf14 \strokec14 =\cf6 \strokec6  \cf11 \strokec11 useState\cf6 \strokec6 (\cf9 \strokec9 ""\cf6 \strokec6 );\cb1 \
+\
+\cb5   \cf12 \strokec12 const\cf6 \strokec6  \cf11 \strokec11 handleImageUpload\cf6 \strokec6  \cf14 \strokec14 =\cf6 \strokec6  \cf12 \strokec12 async\cf6 \strokec6  () \cf12 \strokec12 =>\cf6 \strokec6  \{\cb1 \
+\cb5     \cf12 \strokec12 const\cf6 \strokec6  \cf13 \strokec13 input\cf6 \strokec6  \cf14 \strokec14 =\cf6 \strokec6  \cf8 \strokec8 document\cf6 \strokec6 .\cf11 \strokec11 createElement\cf6 \strokec6 (\cf9 \strokec9 "input"\cf6 \strokec6 );\cb1 \
+\cb5     \cf13 \strokec13 input\cf6 \strokec6 .\cf11 \strokec11 setAttribute\cf6 \strokec6 (\cf9 \strokec9 "type"\cf6 \strokec6 , \cf9 \strokec9 "file"\cf6 \strokec6 );\cb1 \
+\cb5     \cf13 \strokec13 input\cf6 \strokec6 .\cf11 \strokec11 setAttribute\cf6 \strokec6 (\cf9 \strokec9 "accept"\cf6 \strokec6 , \cf9 \strokec9 "image/*"\cf6 \strokec6 );\cb1 \
+\cb5     \cf13 \strokec13 input\cf6 \strokec6 .\cf11 \strokec11 click\cf6 \strokec6 ();\cb1 \
+\
+\cb5     \cf13 \strokec13 input\cf6 \strokec6 .\cf11 \strokec11 onchange\cf6 \strokec6  \cf14 \strokec14 =\cf6 \strokec6  \cf12 \strokec12 async\cf6 \strokec6  () \cf12 \strokec12 =>\cf6 \strokec6  \{\cb1 \
+\cb5       \cf12 \strokec12 const\cf6 \strokec6  \cf13 \strokec13 file\cf6 \strokec6  \cf14 \strokec14 =\cf6 \strokec6  \cf13 \strokec13 input\cf6 \strokec6 .\cf8 \strokec8 files\cf6 \strokec6 [\cf15 \strokec15 0\cf6 \strokec6 ];\cb1 \
+\cb5       \cf12 \strokec12 const\cf6 \strokec6  \cf13 \strokec13 formData\cf6 \strokec6  \cf14 \strokec14 =\cf6 \strokec6  \cf12 \strokec12 new\cf6 \strokec6  \cf10 \strokec10 FormData\cf6 \strokec6 ();\cb1 \
+\cb5       \cf13 \strokec13 formData\cf6 \strokec6 .\cf11 \strokec11 append\cf6 \strokec6 (\cf9 \strokec9 "file"\cf6 \strokec6 , \cf13 \strokec13 file\cf6 \strokec6 );\cb1 \
+\cb5       \cf13 \strokec13 formData\cf6 \strokec6 .\cf11 \strokec11 append\cf6 \strokec6 (\cf9 \strokec9 "upload_preset"\cf6 \strokec6 , \cf9 \strokec9 "Hello_12"\cf6 \strokec6 ); \cf4 \strokec4 //Here Hello_12 is unsigned cloudinary preset\cf6 \cb1 \strokec6 \
+\
+\cb5       \cf7 \strokec7 try\cf6 \strokec6  \{\cb1 \
+\cb5         \cf12 \strokec12 const\cf6 \strokec6  \cf13 \strokec13 res\cf6 \strokec6  \cf14 \strokec14 =\cf6 \strokec6  \cf7 \strokec7 await\cf6 \strokec6  \cf13 \strokec13 axios\cf6 \strokec6 .\cf11 \strokec11 post\cf6 \strokec6 (\cb1 \
+\cb5           \cf9 \strokec9 "https://api.cloudinary.com/v1_1/djwqli3w2/image/upload"\cf6 \strokec6 ,  \cf4 \strokec4 //Here djwqli3w2 is Cloudinary Cloud Name\cf6 \cb1 \strokec6 \
+\cb5           \cf13 \strokec13 formData\cf6 \cb1 \strokec6 \
+\cb5         );\cb1 \
+\cb5         \cf8 \strokec8 console\cf6 \strokec6 .\cf11 \strokec11 log\cf6 \strokec6 (\cf13 \strokec13 res\cf6 \strokec6 .\cf8 \strokec8 data\cf6 \strokec6 )\cb1 \
+\cb5         \cf12 \strokec12 const\cf6 \strokec6  \cf13 \strokec13 imageUrl\cf6 \strokec6  \cf14 \strokec14 =\cf6 \strokec6  \cf13 \strokec13 res\cf6 \strokec6 .\cf8 \strokec8 data\cf6 \strokec6 .\cf8 \strokec8 secure_url\cf6 \strokec6 ;\cb1 \
+\cb5         \cf12 \strokec12 const\cf6 \strokec6  \cf13 \strokec13 editor\cf6 \strokec6  \cf14 \strokec14 =\cf6 \strokec6  \cf13 \strokec13 quillRef\cf6 \strokec6 .\cf8 \strokec8 current\cf6 \strokec6 .\cf11 \strokec11 getEditor\cf6 \strokec6 ();\cb1 \
+\cb5         \cf12 \strokec12 const\cf6 \strokec6  \cf13 \strokec13 range\cf6 \strokec6  \cf14 \strokec14 =\cf6 \strokec6  \cf13 \strokec13 editor\cf6 \strokec6 .\cf11 \strokec11 getSelection\cf6 \strokec6 ();\cb1 \
+\cb5         \cf13 \strokec13 editor\cf6 \strokec6 .\cf11 \strokec11 insertEmbed\cf6 \strokec6 (\cf13 \strokec13 range\cf6 \strokec6 .\cf8 \strokec8 index\cf6 \strokec6 , \cf9 \strokec9 "image"\cf6 \strokec6 , \cf13 \strokec13 imageUrl\cf6 \strokec6 );\cb1 \
+\cb5       \} \cf7 \strokec7 catch\cf6 \strokec6  (\cf8 \strokec8 err\cf6 \strokec6 ) \{\cb1 \
+\cb5         \cf8 \strokec8 console\cf6 \strokec6 .\cf11 \strokec11 error\cf6 \strokec6 (\cf9 \strokec9 "Image upload failed:"\cf6 \strokec6 , \cf8 \strokec8 err\cf6 \strokec6 );\cb1 \
+\cb5       \}\cb1 \
+\cb5     \};\cb1 \
+\cb5   \};\cb1 \
+\
+\cb5   \cf4 \strokec4 // \uc0\u9989  Note: `imageResize` is lowercase here\cf6 \cb1 \strokec6 \
+\cb5   \cf12 \strokec12 const\cf6 \strokec6  \cf13 \strokec13 modules\cf6 \strokec6  \cf14 \strokec14 =\cf6 \strokec6  \cf11 \strokec11 useMemo\cf6 \strokec6 (() \cf12 \strokec12 =>\cf6 \strokec6  (\{\cb1 \
+\cb5     \cf8 \strokec8 toolbar:\cf6 \strokec6  \{\cb1 \
+\cb5       \cf8 \strokec8 container:\cf6 \strokec6  [\cb1 \
+\cb5         [\{ \cf8 \strokec8 size:\cf6 \strokec6  \cf13 \strokec13 Size\cf6 \strokec6 .\cf8 \strokec8 whitelist\cf6 \strokec6  \}],\cb1 \
+\cb5         [\{ \cf8 \strokec8 header:\cf6 \strokec6  [\cf15 \strokec15 1\cf6 \strokec6 , \cf15 \strokec15 2\cf6 \strokec6 , \cf15 \strokec15 3\cf6 \strokec6 , \cf12 \strokec12 false\cf6 \strokec6 ] \}],\cb1 \
+\cb5         [\cf9 \strokec9 "bold"\cf6 \strokec6 , \cf9 \strokec9 "italic"\cf6 \strokec6 , \cf9 \strokec9 "underline"\cf6 \strokec6 , \cf9 \strokec9 "strike"\cf6 \strokec6 ],\cb1 \
+\cb5         [\{ \cf8 \strokec8 list:\cf6 \strokec6  \cf9 \strokec9 "ordered"\cf6 \strokec6  \}, \{ \cf8 \strokec8 list:\cf6 \strokec6  \cf9 \strokec9 "bullet"\cf6 \strokec6  \}],\cb1 \
+\cb5         [\cf9 \strokec9 "blockquote"\cf6 \strokec6 , \cf9 \strokec9 "code-block"\cf6 \strokec6 ],\cb1 \
+\cb5         [\cf9 \strokec9 "link"\cf6 \strokec6 , \cf9 \strokec9 "image"\cf6 \strokec6 ],\cb1 \
+\cb5         [\cf9 \strokec9 "clean"\cf6 \strokec6 ],\cb1 \
+\cb5       ],\cb1 \
+\cb5       \cf8 \strokec8 handlers:\cf6 \strokec6  \{\cb1 \
+\cb5         \cf11 \strokec11 image\cf8 \strokec8 :\cf6 \strokec6  \cf11 \strokec11 handleImageUpload\cf6 \strokec6 ,\cb1 \
+\cb5       \},\cb1 \
+\cb5     \},\cb1 \
+\cb5     \cf8 \strokec8 imageResize:\cf6 \strokec6  \{\cb1 \
+\cb5       \cf8 \strokec8 modules:\cf6 \strokec6  [\cf9 \strokec9 "Resize"\cf6 \strokec6 , \cf9 \strokec9 "DisplaySize"\cf6 \strokec6 , \cf9 \strokec9 "Toolbar"\cf6 \strokec6 ],\cb1 \
+\cb5     \},\cb1 \
+\cb5   \}), []);\cb1 \
+\
+\cb5   \cf12 \strokec12 const\cf6 \strokec6  \cf11 \strokec11 handleSubmit\cf6 \strokec6  \cf14 \strokec14 =\cf6 \strokec6  () \cf12 \strokec12 =>\cf6 \strokec6  \{\cb1 \
+\cb5     \cf11 \strokec11 onSubmit\cf6 \strokec6 (\cf13 \strokec13 value\cf6 \strokec6 );\cb1 \
+\cb5   \};\cb1 \
+\
+\cb5   \cf7 \strokec7 return\cf6 \strokec6  (\cb1 \
+\cb5     \cf16 \strokec16 <\cf12 \strokec12 div\cf16 \strokec16 >\cf6 \cb1 \strokec6 \
+\cb5       \cf16 \strokec16 <\cf10 \strokec10 ReactQuill\cf6 \cb1 \strokec6 \
+\cb5         \cf8 \strokec8 ref\cf14 \strokec14 =\cf12 \strokec12 \{\cf13 \strokec13 quillRef\cf12 \strokec12 \}\cf6 \cb1 \strokec6 \
+\cb5         \cf8 \strokec8 value\cf14 \strokec14 =\cf12 \strokec12 \{\cf13 \strokec13 value\cf12 \strokec12 \}\cf6 \cb1 \strokec6 \
+\cb5         \cf8 \strokec8 onChange\cf14 \strokec14 =\cf12 \strokec12 \{\cf11 \strokec11 setValue\cf12 \strokec12 \}\cf6 \cb1 \strokec6 \
+\cb5         \cf8 \strokec8 modules\cf14 \strokec14 =\cf12 \strokec12 \{\cf13 \strokec13 modules\cf12 \strokec12 \}\cf6 \cb1 \strokec6 \
+\cb5         \cf8 \strokec8 theme\cf14 \strokec14 =\cf9 \strokec9 "snow"\cf6 \cb1 \strokec6 \
+\cb5       \cf16 \strokec16 />\cf6 \cb1 \strokec6 \
+\cb5       \cf16 \strokec16 <\cf12 \strokec12 button\cf6 \cb1 \strokec6 \
+\cb5         \cf8 \strokec8 className\cf14 \strokec14 =\cf9 \strokec9 "mt-4 px-4 py-2 bg-blue-600 text-white rounded"\cf6 \cb1 \strokec6 \
+\cb5         \cf8 \strokec8 onClick\cf14 \strokec14 =\cf12 \strokec12 \{\cf11 \strokec11 handleSubmit\cf12 \strokec12 \}\cf6 \cb1 \strokec6 \
+\cb5       \cf16 \strokec16 >\cf6 \cb1 \strokec6 \
+\cb5         Submit\cb1 \
+\cb5       \cf16 \strokec16 </\cf12 \strokec12 button\cf16 \strokec16 >\cf6 \cb1 \strokec6 \
+\cb5     \cf16 \strokec16 </\cf12 \strokec12 div\cf16 \strokec16 >\cf6 \cb1 \strokec6 \
+\cb5   );\cb1 \
+\cb5 \};\cb1 \
+\
+\cf7 \cb5 \strokec7 export\cf6 \strokec6  \cf7 \strokec7 default\cf6 \strokec6  \cf11 \strokec11 Editor\cf6 \strokec6 ;\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf6 \cb17 \outl0\strokewidth0 \
+\
+
+\fs72 \cf2 \cb3 \
+This is my App.jsx or any page where I want to show my editor \
+
+\fs24 \cf18 \cb17 import React from "react";\
+import Editor from "./components/Editor";\
+import axios from "axios";\
+\
+function App() \{\
+  const handleSubmit = async (html) => \{\
+    await axios.post("http://localhost:5000/api/posts", \{ content: html \});\
+    alert("Content submitted!");\
+  \};\
+\
+  return (\
+    <div className="max-w-4xl mx-auto mt-10">\
+      <h1 className="text-3xl font-bold mb-4">My Rich Text Editor</h1>\
+      <Editor onSubmit=\{handleSubmit\} />\
+    </div>\
+  );\
+\}\
+\
+export default App;\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs72 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+I can use handleSubmit function to send request to backend also.\
+\
+Now when we submit this form it will send data to backend in HTML form and that will be saved to database in HTML form Now when we fetch data from backend it will be in HTML form which can be rendered on frontend using \'93
+\f2\fs48 \expnd0\expndtw0\kerning0
+dangerouslySetInnerHTML\'94\
+\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs24 \cf7 \cb5 \outl0\strokewidth0 \strokec7 @tailwind\cf6 \strokec6  base;\cb1 \
+\cf7 \cb5 \strokec7 @tailwind\cf6 \strokec6  components;\cb1 \
+\cf7 \cb5 \strokec7 @tailwind\cf6 \strokec6  utilities;\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf19 \cb5 \strokec19 .ql-snow\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker.ql-size\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker-item\cf6 \cb5 \strokec6 [\cf8 \strokec8 data-value\cf14 \strokec14 =\cf9 \strokec9 "12px"\cf6 \strokec6 ]\cf19 \cb5 \strokec19 ::before\cf6 \cb5 \strokec6 ,\cb1 \
+\cf19 \cb5 \strokec19 .ql-snow\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker.ql-size\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker-label\cf6 \cb5 \strokec6 [\cf8 \strokec8 data-value\cf14 \strokec14 =\cf9 \strokec9 "12px"\cf6 \strokec6 ]\cf19 \cb5 \strokec19 ::before\cf6 \cb5 \strokec6  \{\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf6 \cb5   \cf8 \strokec8 content\cf6 \strokec6 : \cf9 \strokec9 "12px"\cf6 \strokec6 ;\cb1 \
+\cb5 \}\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf19 \cb5 \strokec19 .ql-snow\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker.ql-size\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker-item\cf6 \cb5 \strokec6 [\cf8 \strokec8 data-value\cf14 \strokec14 =\cf9 \strokec9 "14px"\cf6 \strokec6 ]\cf19 \cb5 \strokec19 ::before\cf6 \cb5 \strokec6 ,\cb1 \
+\cf19 \cb5 \strokec19 .ql-snow\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker.ql-size\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker-label\cf6 \cb5 \strokec6 [\cf8 \strokec8 data-value\cf14 \strokec14 =\cf9 \strokec9 "14px"\cf6 \strokec6 ]\cf19 \cb5 \strokec19 ::before\cf6 \cb5 \strokec6  \{\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf6 \cb5   \cf8 \strokec8 content\cf6 \strokec6 : \cf9 \strokec9 "14px"\cf6 \strokec6 ;\cb1 \
+\cb5 \}\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf19 \cb5 \strokec19 .ql-snow\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker.ql-size\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker-item\cf6 \cb5 \strokec6 [\cf8 \strokec8 data-value\cf14 \strokec14 =\cf9 \strokec9 "16px"\cf6 \strokec6 ]\cf19 \cb5 \strokec19 ::before\cf6 \cb5 \strokec6 ,\cb1 \
+\cf19 \cb5 \strokec19 .ql-snow\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker.ql-size\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker-label\cf6 \cb5 \strokec6 [\cf8 \strokec8 data-value\cf14 \strokec14 =\cf9 \strokec9 "16px"\cf6 \strokec6 ]\cf19 \cb5 \strokec19 ::before\cf6 \cb5 \strokec6  \{\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf6 \cb5   \cf8 \strokec8 content\cf6 \strokec6 : \cf9 \strokec9 "16px"\cf6 \strokec6 ;\cb1 \
+\cb5 \}\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf19 \cb5 \strokec19 .ql-snow\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker.ql-size\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker-item\cf6 \cb5 \strokec6 [\cf8 \strokec8 data-value\cf14 \strokec14 =\cf9 \strokec9 "18px"\cf6 \strokec6 ]\cf19 \cb5 \strokec19 ::before\cf6 \cb5 \strokec6 ,\cb1 \
+\cf19 \cb5 \strokec19 .ql-snow\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker.ql-size\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker-label\cf6 \cb5 \strokec6 [\cf8 \strokec8 data-value\cf14 \strokec14 =\cf9 \strokec9 "18px"\cf6 \strokec6 ]\cf19 \cb5 \strokec19 ::before\cf6 \cb5 \strokec6  \{\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf6 \cb5   \cf8 \strokec8 content\cf6 \strokec6 : \cf9 \strokec9 "18px"\cf6 \strokec6 ;\cb1 \
+\cb5 \}\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf19 \cb5 \strokec19 .ql-snow\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker.ql-size\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker-item\cf6 \cb5 \strokec6 [\cf8 \strokec8 data-value\cf14 \strokec14 =\cf9 \strokec9 "24px"\cf6 \strokec6 ]\cf19 \cb5 \strokec19 ::before\cf6 \cb5 \strokec6 ,\cb1 \
+\cf19 \cb5 \strokec19 .ql-snow\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker.ql-size\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker-label\cf6 \cb5 \strokec6 [\cf8 \strokec8 data-value\cf14 \strokec14 =\cf9 \strokec9 "24px"\cf6 \strokec6 ]\cf19 \cb5 \strokec19 ::before\cf6 \cb5 \strokec6  \{\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf6 \cb5   \cf8 \strokec8 content\cf6 \strokec6 : \cf9 \strokec9 "24px"\cf6 \strokec6 ;\cb1 \
+\cb5 \}\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf19 \cb5 \strokec19 .ql-snow\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker.ql-size\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker-item\cf6 \cb5 \strokec6 [\cf8 \strokec8 data-value\cf14 \strokec14 =\cf9 \strokec9 "32px"\cf6 \strokec6 ]\cf19 \cb5 \strokec19 ::before\cf6 \cb5 \strokec6 ,\cb1 \
+\cf19 \cb5 \strokec19 .ql-snow\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker.ql-size\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker-label\cf6 \cb5 \strokec6 [\cf8 \strokec8 data-value\cf14 \strokec14 =\cf9 \strokec9 "32px"\cf6 \strokec6 ]\cf19 \cb5 \strokec19 ::before\cf6 \cb5 \strokec6  \{\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf6 \cb5   \cf8 \strokec8 content\cf6 \strokec6 : \cf9 \strokec9 "32px"\cf6 \strokec6 ;\cb1 \
+\cb5 \}\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf19 \cb5 \strokec19 .ql-snow\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker.ql-size\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker-item\cf6 \cb5 \strokec6 [\cf8 \strokec8 data-value\cf14 \strokec14 =\cf9 \strokec9 "48px"\cf6 \strokec6 ]\cf19 \cb5 \strokec19 ::before\cf6 \cb5 \strokec6 ,\cb1 \
+\cf19 \cb5 \strokec19 .ql-snow\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker.ql-size\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker-label\cf6 \cb5 \strokec6 [\cf8 \strokec8 data-value\cf14 \strokec14 =\cf9 \strokec9 "48px"\cf6 \strokec6 ]\cf19 \cb5 \strokec19 ::before\cf6 \cb5 \strokec6  \{\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf6 \cb5   \cf8 \strokec8 content\cf6 \strokec6 : \cf9 \strokec9 "48px"\cf6 \strokec6 ;\cb1 \
+\cb5 \}\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf19 \cb5 \strokec19 .ql-snow\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker.ql-size\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker-item\cf6 \cb5 \strokec6 [\cf8 \strokec8 data-value\cf14 \strokec14 =\cf9 \strokec9 "64px"\cf6 \strokec6 ]\cf19 \cb5 \strokec19 ::before\cf6 \cb5 \strokec6 ,\cb1 \
+\cf19 \cb5 \strokec19 .ql-snow\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker.ql-size\cf6 \cb5 \strokec6  \cf19 \cb5 \strokec19 .ql-picker-label\cf6 \cb5 \strokec6 [\cf8 \strokec8 data-value\cf14 \strokec14 =\cf9 \strokec9 "64px"\cf6 \strokec6 ]\cf19 \cb5 \strokec19 ::before\cf6 \cb5 \strokec6  \{\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf6 \cb5   \cf8 \strokec8 content\cf6 \strokec6 : \cf9 \strokec9 "64px"\cf6 \strokec6 ;\cb1 \
+\cb5 \}\cb1 \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f2\fs48 \cf0 \outl0\strokewidth0 \
+\
+Add these code to index.css\
+\
+
+\f0 \kerning1\expnd0\expndtw0  
+\fs72 \
+\
+}
