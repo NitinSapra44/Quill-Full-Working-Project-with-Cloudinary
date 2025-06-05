@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="12px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="12px"]::before {
+  content: "12px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="14px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="14px"]::before {
+  content: "14px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="16px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="16px"]::before {
+  content: "16px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="18px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="18px"]::before {
+  content: "18px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="24px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="24px"]::before {
+  content: "24px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="32px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="32px"]::before {
+  content: "32px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="48px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="48px"]::before {
+  content: "48px";
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="64px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="64px"]::before {
+  content: "64px";
+}
